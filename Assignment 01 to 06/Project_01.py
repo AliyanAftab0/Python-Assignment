@@ -113,11 +113,9 @@ def play_story(story):
 
     answers = {}
     for prompt in story["prompts"]:
-        # Add 'a' or 'an' before the prompt when appropriate
         article = "an" if prompt.startswith(("a", "e", "i", "o", "u")) else "a"
         answers[prompt] = input(f"Enter {article} {prompt.replace('_', ' ')}: ")
 
-    # Generate the story by replacing placeholders
     madlib = story["template"]
     for key, value in answers.items():
         madlib = madlib.replace("{" + key + "}", value)

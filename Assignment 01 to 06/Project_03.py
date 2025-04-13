@@ -22,7 +22,7 @@ def computer_guess():
     low = 1
     high = 100
     attempts = 0
-    max_attempts = 7  # Computer can guess in max 7 attempts using binary search
+    max_attempts = 7 
 
     print("\nOkay, I'll start guessing now!")
 

@@ -21,7 +21,6 @@ def display_welcome():
 
 
 def load_words():
-    # Categories of words
     categories = {
         "animals": ["elephant", "giraffe", "kangaroo", "dolphin", "rhinoceros"],
         "fruits": ["watermelon", "strawberry", "pineapple", "blueberry", "raspberry"],
@@ -120,12 +119,10 @@ def play_game():
     while len(word_letters) > 0 and tries < max_tries:
         print("\n" + display_hangman(tries))
 
-        # Show current progress
         word_list = [letter if letter in correct_letters else "_" for letter in word]
         print("Current word:", " ".join(word_list))
         print("Used letters:", " ".join(sorted(used_letters)))
 
-        # Get user input
         while True:
             guess = input("Guess a letter: ").lower()
             if guess in alphabet - used_letters:
@@ -136,7 +133,6 @@ def play_game():
             else:
                 print("Invalid input. Please enter a single letter.")
 
-        # Check if guess is correct
         if guess in word_letters:
             word_letters.remove(guess)
             correct_letters.add(guess)
@@ -147,7 +143,6 @@ def play_game():
                 f"Oops! That letter is not in the word. Tries left: {max_tries - tries}"
             )
 
-    # Game over - show result
     print("\n" + display_hangman(tries))
     if tries == max_tries:
         print(f"Sorry, you lost! The word was: {word}")

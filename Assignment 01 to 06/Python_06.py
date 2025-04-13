@@ -1,6 +1,6 @@
 import time
 import sys
-import winsound  # For Windows sound alerts
+import winsound
 import platform
 from datetime import datetime, timedelta
 
@@ -23,9 +23,8 @@ def display_welcome():
 def play_sound():
     """Play alert sound appropriate for the OS"""
     if platform.system() == "Windows":
-        winsound.Beep(1000, 1000)  # Frequency, Duration in ms
+        winsound.Beep(1000, 1000)
     else:
-        # Mac/Linux - print ASCII bell character
         sys.stdout.write("\a")
         sys.stdout.flush()
 
@@ -35,21 +34,19 @@ def get_time_input():
     while True:
         time_str = input("Enter countdown time (HH:MM:SS or MM:SS or SS): ")
         try:
-            # Parse the time string into hours, minutes, seconds
             parts = list(map(int, time_str.split(":")))
 
-            if len(parts) == 3:  # HH:MM:SS
+            if len(parts) == 3:
                 hours, minutes, seconds = parts
-            elif len(parts) == 2:  # MM:SS
+            elif len(parts) == 2:
                 hours = 0
                 minutes, seconds = parts
-            elif len(parts) == 1:  # SS
+            elif len(parts) == 1:
                 hours, minutes = 0, 0
                 seconds = parts[0]
             else:
                 raise ValueError("Invalid time format")
 
-            # Validate each component
             if seconds >= 60 or minutes >= 60:
                 raise ValueError("Seconds or minutes cannot be ≥60")
             if any(t < 0 for t in (hours, minutes, seconds)):
@@ -80,18 +77,14 @@ def run_timer(hours, minutes, seconds):
 
     try:
         while total_seconds > 0:
-            # Calculate remaining time
             remaining = end_time - datetime.now()
             total_seconds = max(0, int(remaining.total_seconds()))
 
-            # Display progress
             sys.stdout.write("\r" + format_time(total_seconds) + " remaining ")
             sys.stdout.flush()
 
-            # Check every 0.1 seconds for smoother display
             time.sleep(0.1)
 
-        # Timer complete
         print("\n\nTIME'S UP!")
         play_sound()
 

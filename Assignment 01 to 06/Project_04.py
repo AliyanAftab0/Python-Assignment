@@ -22,7 +22,6 @@ def get_player_choice():
     while True:
         choice = input("Enter your choice (rock/paper/scissors): ").lower()
         if choice in ["rock", "paper", "scissors", "r", "p", "s"]:
-            # Convert shorthand to full word
             if choice == "r":
                 return "rock"
             elif choice == "p":
